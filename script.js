@@ -187,7 +187,7 @@ c('.pizzaInfo--addButton').addEventListener("click", ()=>{
 
 function updateCart(){
 
-   
+   c('.menu-openner span').innerHTML = cart.length ; 
 
     if(cart.length > 0){
 
@@ -195,6 +195,10 @@ function updateCart(){
         c('aside').classList.add("show") ;
 
         c('.cart').innerHTML = '' ; 
+
+        let subtotal  = 0 ;
+        let desconto = 0 ;
+        let total = 0 ; 
 
         for(let i in cart){ //rever 
 
@@ -226,19 +230,75 @@ function updateCart(){
             cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
             cartItem.querySelector(".cart--item img").src = pizzaItem.img 
             cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qt
+            cartItem.querySelector('.cart--item-qtmenos').addEventListener("click", ()=>{
+                if(cart[i].qt > 1){
+                    cart[i].qt--
+                }else{
+                    cart.splice(i,1) //remover o carrinho 
+                }
+                updateCart() ;
 
-            c('.cart').append(cartItem)
+            }) ;
+            cartItem.querySelector('.cart--item-qtmais').addEventListener("click", ()=>{
+                cart[i].qt++ ; 
+                updateCart()
+                
+            }) ;
+
+            subtotal += pizzaItem.price * cart[i].qt ;
+
+            c('.cart').append(cartItem) ; 
 
 
            
         }
+
+        desconto = subtotal *0.1 ;
+        total = subtotal - desconto ;
+
+        c('.subtotal span:last-child').innerHTML = `R$${subtotal.toFixed(2)}`
+        c('.desconto span:last-child').innerHTML = `R$${desconto.toFixed(2)}`
+        c('.total span:last-child').innerHTML = `R$${total.toFixed(2)}`
 
 
     }else{
 
         //tira o carrinho de tela 
         c('aside').classList.remove("show") ;
+        c('aside').style.left = "100vw" ; 
+
+       
 
     }
+
+
+  
 }
+
+c('.cart--finalizar').addEventListener("click", ()=>{
+  
+    alert('Compra realizada com sucesso,obrigado pela compra !!!')
+    c('aside').classList.remove("show") ;
+    cart.length = ' '
+    
+})
+
+
+// abrir o carrinho no cell
+c('.menu-openner').addEventListener("click", ()=>{
+    if(cart.length > 0){
+        c('aside').style.left = "0" ; 
+    }
+
+    
+})
+
+//fecha o carrtinho no cell 
+c(".menu-closer").addEventListener('click', ()=>{
+  
+    c('aside').style.left = "100vw" ; 
+})
+
+
+
 
