@@ -50,9 +50,9 @@ pizzaJson.map((item,index)=>{   //mapear cada item doc aary
     pizzaItem.querySelector('a').addEventListener('click', (e)=>{
         e.preventDefault() ;
 
-        let key = e.target.closest('.pizza-item').getAttribute('data-key') //vai sair do elemento a, e procura o elemento mais proximo 
+        let key = e.target.closest('.pizza-item').getAttribute('data-key') //vai sair do elemento a, e procura o elemento mais proximo  //rever
 
-        modalQt = 1 ; 
+        modalQt = 1 ; //rever 
 
         modalKey = key ; 
 
@@ -63,7 +63,7 @@ pizzaJson.map((item,index)=>{   //mapear cada item doc aary
 
         c('.pizzaInfo--size.selected').classList.remove('selected')
 
-        cs('.pizzaInfo--size').forEach((size,sizeIndex)=> {
+        cs('.pizzaInfo--size').forEach((size,sizeIndex)=> { //rever 
 
             if(sizeIndex == 2){
                 size.classList.add('selected')
@@ -148,15 +148,15 @@ c('.pizzaInfo--addButton').addEventListener("click", ()=>{
 
     //Qual o tamanho ? 
 
-    let size =  parseInt(c('.pizzaInfo--size.selected').getAttribute("data-key"))
+    let size =  parseInt(c('.pizzaInfo--size.selected').getAttribute("data-key")) //rever 
     
 
     //Quantas pizzas ? 
 
-    let identifier = pizzaJson[modalKey].id+ '@'+size ;
+    let identifier = pizzaJson[modalKey].id+ '@'+size ; //rever 
     
 
-    let key = cart.findIndex((item)=>{
+    let key = cart.findIndex((item)=>{ //rever 
         return item.identifier == identifier ; 
     })
 
@@ -196,7 +196,7 @@ function updateCart(){
 
         c('.cart').innerHTML = '' ; 
 
-        for(let i in cart){
+        for(let i in cart){ //rever 
 
             let pizzaItem = pizzaJson.find((item)=>{
                 return item.id == cart[i].id
