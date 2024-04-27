@@ -247,6 +247,8 @@ function updateCart(){
 
             subtotal += pizzaItem.price * cart[i].qt ;
 
+            
+
             c('.cart').append(cartItem) ; 
 
 
